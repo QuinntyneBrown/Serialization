@@ -5,11 +5,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Serialization.Core;
 
-public class Serializer: ISerializer
+public class Serializer : ISerializer
 {
     private readonly ILogger<Serializer> _logger;
 
-    public Serializer(ILogger<Serializer> logger){
+    public Serializer(ILogger<Serializer> logger)
+    {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 

@@ -5,11 +5,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Serialization.Core;
 
-public class Binary: IBinary
+public class Binary : IBinary
 {
     private readonly ILogger<Binary> _logger;
 
-    public Binary(ILogger<Binary> logger){
+    public Binary(ILogger<Binary> logger)
+    {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 

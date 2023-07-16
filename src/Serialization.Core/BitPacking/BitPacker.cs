@@ -14,7 +14,6 @@ public class BitPacker : IBitPacker
         {
             foreach (var bitDescriptor in byteDescriptor.Value)
             {
-
                 Pack(buffer, bitDescriptor);
             }
         }

@@ -8,10 +8,11 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ConfigureServices
 {
-    public static void AddCoreServices(this IServiceCollection services){ 
+    public static void AddCoreServices(this IServiceCollection services)
+    {
 
         services.AddSingleton<IBitPacker, BitPacker>();
-        services.AddSingleton<IBinary,Binary>();    
+        services.AddSingleton<IBinary, Binary>();
         services.AddSingleton<ISerializer, Serializer>();
     }
 

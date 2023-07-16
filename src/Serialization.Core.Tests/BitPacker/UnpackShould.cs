@@ -19,7 +19,7 @@ public class UnpackShould
 
         var byteDescriptor = new ByteDescriptor(0, 2, 1, new byte[] { 1 });
 
-        var bitDescriptor = new BitDescriptor(0, 2, new (1));
+        var bitDescriptor = new BitDescriptor(0, 2, new(1));
 
         var services = new ServiceCollection();
 

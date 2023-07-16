@@ -5,7 +5,8 @@ using System;
 
 namespace Serialization.Core;
 
-public interface ISerializationStrategy<T> { 
+public interface ISerializationStrategy<T>
+{
 
     byte[] Deserialize(T model);
 }

@@ -8,7 +8,8 @@ namespace Serialization.Core.Tests.Serializer;
 
 using Serializer = Serialization.Core.Serializer;
 
-public class SerializeShould {
+public class SerializeShould
+{
 
     [Fact]
     public void ReturnExpectedBytes()
@@ -22,7 +23,7 @@ public class SerializeShould {
         var sut = ActivatorUtilities.CreateInstance<Serializer>(serviceProvider);
 
         var result = sut.Serialize(true);
-        
+
         Assert.Equal(expected, result);
     }
 }
