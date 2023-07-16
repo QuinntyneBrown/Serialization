@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="BitPacker\" />
-    <Folder Include="Serializer\" />
   </ItemGroup>
 
   <ItemGroup>

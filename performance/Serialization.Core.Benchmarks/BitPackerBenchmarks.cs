@@ -7,12 +7,14 @@ using Serialization.Core.BitPacking;
 using System;
 using System.Buffers.Binary;
 
+
 namespace Serialization.Core.Benchmarks;
 
 [MemoryDiagnoser]
 [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
 [RankColumn]
-public class BitPackerBenchmarks {
+public class BitPackerBenchmarks
+{
 
     private BitPacker bitPacker;
 
@@ -34,13 +36,83 @@ public class BitPackerBenchmarks {
     [Benchmark]
     public void _1Byte()
     {
-        var inputBuffer = new byte[8];
+        var length = 1;
 
-        var outBuffer = new byte[8];
+        var outBuffer = new byte[64];
 
-        BinaryPrimitives.WriteUInt64BigEndian(inputBuffer, 9_223_372_036_854_775_807);
+        bitPacker.PackIntoBuffer(new BitDescriptor[] {
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
 
-        bitPacker.Pack(outBuffer, new ByteDescriptor(0, 0, 64, inputBuffer));
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length),
+            new BitDescriptor(255, length)
+        }, outBuffer);
 
     }
 }

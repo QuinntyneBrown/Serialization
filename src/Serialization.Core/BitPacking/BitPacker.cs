@@ -1,68 +1,59 @@
 ﻿// Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections;
-using Serialization.Core.Extensions;
-
 namespace Serialization.Core.BitPacking;
 
-public class BitPacker : IBitPacker
+public record BitDescriptor(int Value, int Length);
+
+
+public class BitPacker: IBitPacker
 {
-    public void Pack(byte[] buffer, ByteDescriptor[] byteDescriptors)
+    public void PackIntoBuffer(BitDescriptor[] bitDescriptors, byte[] buffer)
     {
-        foreach (var byteDescriptor in byteDescriptors)
+        int index = 0;
+
+        int bitIndex = 0;
+
+        foreach (var bitDescriptor in bitDescriptors)
         {
-            foreach (var bitDescriptor in byteDescriptor.Value)
+            var value = bitDescriptor.Value;
+
+            var vLength = bitDescriptor.Length;
+
+            while (vLength > 0)
             {
-                Pack(buffer, bitDescriptor);
+                if (index >= buffer.Length)
+                    return;
+
+                int bitsToPack = 8 - bitIndex;
+
+                if (vLength <= bitsToPack)
+                {
+                    var mask = (1 << vLength) - 1;
+
+                    buffer[index] |= (byte)((value & mask) << bitIndex);
+
+                    bitIndex += vLength;
+
+                    if (bitIndex == 8)
+                    {
+                        bitIndex = 0;
+                        index++;
+                    }
+
+                    vLength = -1;
+                }
+                else
+                {
+                    int mask = ((1 << bitsToPack) - 1) << (vLength - bitsToPack);
+
+                    buffer[index] |= (byte)((value & mask) << bitIndex - 1);
+
+                    bitIndex = 0;
+                    index++;
+                    vLength -= bitsToPack;
+                }
             }
         }
     }
-
-    public void Pack(byte[] buffer, ByteDescriptor byteDescriptor)
-    {
-        foreach (var bitDescriptor in byteDescriptor.Value)
-        {
-            Pack(buffer, bitDescriptor);
-        }
-    }
-
-    internal void Pack(byte[] buffer, BitDescriptor bitDescriptor)
-    {
-        var currentValue = buffer[bitDescriptor.ByteStartIndex].ToBitArray();
-
-        if (bitDescriptor.BitStartIndex == 0 && bitDescriptor.Value.Length <= 8)
-        {
-            bitDescriptor.Value.CopyTo(buffer, bitDescriptor.ByteStartIndex);
-        }
-
-        if (bitDescriptor.Value.Length + bitDescriptor.BitStartIndex <= 8)
-        {
-            currentValue.MergeAt(bitDescriptor.Value, bitDescriptor.BitStartIndex);
-
-            currentValue.CopyTo(buffer, bitDescriptor.ByteStartIndex);
-        }
-
-        if (bitDescriptor.Value.Length + bitDescriptor.BitStartIndex > 8)
-        {
-            currentValue.MergeAt(bitDescriptor.Value, bitDescriptor.BitStartIndex, 8);
-
-            currentValue.CopyTo(buffer, bitDescriptor.ByteStartIndex);
-
-            var remainder = new BitArray(8 - bitDescriptor.BitStartIndex);
-
-            remainder.MergeAt(bitDescriptor.Value, 0, 8 - bitDescriptor.BitStartIndex);
-
-            Pack(buffer, new BitDescriptor(bitDescriptor.ByteStartIndex + 1, 0, remainder));
-        }
-    }
-
-    public void Unpack(byte[] buffer, BitDescriptor bitDescriptor)
-    {
-
-        var startIndex = bitDescriptor.ByteStartIndex * 8 + bitDescriptor.BitStartIndex;
-
-        bitDescriptor.Value.ExtractAt(new BitArray(buffer), startIndex);
-    }
 }
-
