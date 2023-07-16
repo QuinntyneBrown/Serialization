@@ -21,4 +21,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BitPacker\" />
+    <Folder Include="Serializer\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Serialization.Core\Serialization.Core.csproj" />
+  </ItemGroup>
+
 </Project>
