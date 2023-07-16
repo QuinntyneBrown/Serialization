@@ -12,7 +12,7 @@ public static class ConfigureServices
     {
 
         services.AddSingleton<IBitPacker, BitPacker>();
-        services.AddSingleton<IBinary, Binary>();
+        services.AddSingleton<ITypeConverter, TypeConverter>();
         services.AddSingleton<ISerializer, Serializer>();
     }
 

@@ -3,9 +3,10 @@
 
 namespace Serialization.Core;
 
-public interface IBinary
+public interface ITypeConverter
 {
     void WriteBool(Span<byte> destination, bool value);
+    bool ReadBool(byte[] buffer);
 
 }
 
