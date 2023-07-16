@@ -4,7 +4,6 @@
 using BenchmarkDotNet.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 using Serialization.Core.BitPacking;
-using System;
 using System.Buffers.Binary;
 
 namespace Serialization.Core.Benchmarks;
@@ -15,8 +14,6 @@ namespace Serialization.Core.Benchmarks;
 public class BitPackerBenchmarks {
 
     private BitPacker bitPacker;
-
-
 
     [GlobalSetup]
     public void Setup()

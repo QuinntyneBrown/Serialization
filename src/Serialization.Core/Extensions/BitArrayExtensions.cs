@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using Serialization.Core.BitPacking;
 using System.Collections;
 
 namespace Serialization.Core.Extensions;
@@ -28,6 +29,15 @@ public static class BitArrayExtensions
         for (var i = 0; i < destination.Length; i++)
         {
             destination[i] = source[i + offset];
+        }
+    }
+
+    public static void ExtractAt(this byte[] buffer, BitDescriptor bitDescriptor)
+    {
+        int bits = 0;
+        foreach(var @byte in buffer)
+        {
+            var b = @byte << bitDescriptor.BitStartIndex;
         }
     }
 
