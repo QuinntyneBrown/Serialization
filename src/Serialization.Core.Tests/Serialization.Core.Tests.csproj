@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BitPacker\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Serialization.Core\Serialization.Core.csproj" />
   </ItemGroup>
 

@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Serialization.Core;
-using Serialization.Core.BitPacking;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

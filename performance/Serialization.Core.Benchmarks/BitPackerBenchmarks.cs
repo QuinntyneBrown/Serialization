@@ -3,7 +3,6 @@
 
 using BenchmarkDotNet.Attributes;
 using Microsoft.Extensions.DependencyInjection;
-using Serialization.Core.BitPacking;
 using System;
 using System.Buffers.Binary;
 
