@@ -6,9 +6,9 @@ namespace Serialization.Core;
 public record BitDescriptor(int Value, int Length);
 
 
-public class BitPacker : IBitPacker
+public static class BitPacker
 {
-    public void PackIntoBuffer(BitDescriptor[] bitDescriptors, byte[] buffer)
+    public static void PackIntoBuffer(BitDescriptor[] bitDescriptors, byte[] buffer)
     {
         int index = 0;
 
@@ -57,7 +57,7 @@ public class BitPacker : IBitPacker
         }
     }
 
-    public byte[] Unpack(byte[] buffer, int take, int index = 0, int offset = 0)
+    public static byte[] Unpack(byte[] buffer, int take, int index = 0, int offset = 0)
     {
         var size = take + offset + 7 >>> 3;
 

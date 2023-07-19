@@ -10,13 +10,6 @@ public static class ConfigureServices
     public static void AddCoreServices(this IServiceCollection services)
     {
 
-        services.AddSingleton<IBitPacker, BitPacker>();
-        services.AddSingleton<ITypeConverter, TypeConverter>();
-        services.AddSingleton<ISerializer, Serializer>();
     }
 
 }
-
-
-
-

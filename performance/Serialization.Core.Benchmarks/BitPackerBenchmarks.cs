@@ -14,21 +14,10 @@ namespace Serialization.Core.Benchmarks;
 [RankColumn]
 public class BitPackerBenchmarks
 {
-
-    private BitPacker bitPacker;
-
-
-
     [GlobalSetup]
     public void Setup()
     {
-        var services = new ServiceCollection();
 
-        services.AddCoreServices();
-
-        var serviceProvider = services.BuildServiceProvider();
-
-        bitPacker = ActivatorUtilities.CreateInstance<BitPacker>(serviceProvider);
 
     }
 
@@ -39,7 +28,7 @@ public class BitPackerBenchmarks
 
         var outBuffer = new byte[64];
 
-        bitPacker.PackIntoBuffer(new BitDescriptor[] {
+        BitPacker.PackIntoBuffer(new BitDescriptor[] {
             new BitDescriptor(255, length),
             new BitDescriptor(255, length),
             new BitDescriptor(255, length),
